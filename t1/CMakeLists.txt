@@ -1,2 +1,2 @@
 PROJECT(HELLO)
-ADD_SUBDIRECTORY(src bin)
+ADD_EXECUTABLE(hello main.cpp)

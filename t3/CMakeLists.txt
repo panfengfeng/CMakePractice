@@ -1,19 +1,18 @@
-PROJECT(hello)
-cmake_minimum_required(VERSION 3.5)
+PROJECT(HELLO)
+cmake_minimum_required(VERSION 2.8)
 include_directories(${PROJECT_SOURCE_DIR}/include)
+set(SOURCES
+	src/hello.cpp)
+add_library(hello SHARED ${SOURCES})
+target_link_libraries(hello)
 
-# Main library source code
-
-set(SOURCES 
-        src/hello.cpp)
-add_library(hellolib${ARTIFACT_SUFFIX} STATIC ${SOURCES})
-target_link_libraries(hellolib${ARTIFACT_SUFFIX})
-
-add_library(hello${ARTIFACT_SUFFIX} SHARED ${SOURCES})
-target_link_libraries(hello${ARTIFACT_SUFFIX})
+add_library(hello_static STATIC ${SOURCES})
+SET_TARGET_PROPERTIES(hello_static PROPERTIES OUTPUT_NAME "hello")
+target_link_libraries(hello)
 
 # Test
 
 set(BENCHMARK
         benchmark/bench.cpp)
 add_executable(bench ${BENCHMARK})
+target_link_libraries(bench hello)
